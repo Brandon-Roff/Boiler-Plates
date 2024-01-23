@@ -1,5 +1,5 @@
 
-<p align="center"> <img src="Images/Header.png" alt="Your Icon" /> </p>
+<p align="center"> <img src="Images/Header.png" alt="Header Images" style="border-radius: 50%;" /> </p>
 
 
 
