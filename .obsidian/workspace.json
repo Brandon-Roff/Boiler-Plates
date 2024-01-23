@@ -1,0 +1,213 @@
+{
+  "main": {
+    "id": "b7da4c97bb8098aa",
+    "type": "split",
+    "children": [
+      {
+        "id": "c6698fbb7c2db611",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "20f59ffd4c589057",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c687c726b57ffe0f",
+    "type": "split",
+    "children": [
+      {
+        "id": "45753fa2f263c198",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "568c1c7c7ddf5646",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "f633a8dd98ea5baa",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "aadb426c53dc79cb",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          },
+          {
+            "id": "28a56c85cfe26294",
+            "type": "leaf",
+            "state": {
+              "type": "mk-path-view",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "804905a22aa3acaf",
+    "type": "split",
+    "children": [
+      {
+        "id": "bcdda884d8487da6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cd2f0d5aa98bbb38",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "3e1cb26d054cf3d8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "README.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6b1a5837a9e6a066",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "cadb0cc398a9ada9",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "README.md"
+              }
+            }
+          },
+          {
+            "id": "caf4cff3fdd1595b",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "templater-obsidian:Templater": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-projects:Open projects": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
+    }
+  },
+  "active": "20f59ffd4c589057",
+  "lastOpenFiles": [
+    "Images/Header.png.crdownload",
+    "Images/Header.png",
+    "Images",
+    "README.md",
+    "Networking/Networking.md",
+    "Networking/Cloudflare/Cloudflare.md",
+    "Networking/Ultimate Reverse Proxy.md",
+    "Media Sever/Sonarr/Setup Reverse Proxy for Sonarr.md",
+    "Networking/Cloudflare/Untitled.md",
+    "images/media/Skull.png",
+    "images/media/Prowlarr.png",
+    "Spaces/Home",
+    "Spaces",
+    "Networking/Cloudflare",
+    "Networking/NGINX Proxy Manager/Nginx Proxy Manager.md",
+    "Networking NGINX Proxy Manager%2FNginx Proxy Manager.md",
+    "Networking/NGINX Proxy Manager",
+    "Media Sever/Sonarr/Installing Sonarr.md",
+    "_templates/Media/Arr Post Install Notes Template.md",
+    "_templates/Media/Arr Install Template.md",
+    "Docker/Setup Docker, Docker-Compose.md",
+    "Networking/Pi-Hole/Pi-Hole.md",
+    "Media Sever/Radarr/Radarr.md",
+    "Media Sever/Sonarr/Installing Sonarr 1.md",
+    "Media Sever/Installing Sonarr.md",
+    "images/media/Bitwarden.ico",
+    "images/media/Bazarr.ico",
+    "Media Sever/Sonarr",
+    "_templates/Media/Arr Post Install.md",
+    "Untitled.md",
+    "_templates/Media",
+    "_templates",
+    "Pasted image 20240104190943.png",
+    "Media Sever/Sonarr/Sonarr.md",
+    "Media Sever/Plex/Setting up Plex Media Sever.md",
+    "Media Sever/Sonarr.md",
+    "Media.md",
+    "Media Sever/Sonarr/Setting up Sonarr.md",
+    "images/media/radarr.png",
+    "images/media/transmission.png",
+    "images/media/sonarr.png",
+    "Untitled.canvas"
+  ]
+}

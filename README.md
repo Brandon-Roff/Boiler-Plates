@@ -1,14 +1,11 @@
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
+<p align="center"> <img src="Images/Header.png" alt="Your Icon" /> </p>
 
 
 
 # 🚀 Awesome Code and Configuration Boilerplates 🛠️
 
 ### Welcome to the Awesome Code and Configuration Boilerplates repository! Your ultimate source for elegant and well-structured boilerplate code, empowering you to jumpstart projects and streamline configurations with finesse.
-
-
 
 
 
