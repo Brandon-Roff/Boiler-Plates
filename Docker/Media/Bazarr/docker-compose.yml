@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+    linuxserver:
+        image: lscr.io/linuxserver/bazarr:latest
+        restart: always
+        volumes:
+            - './config:/config' # Point to config folder you may want a volume 
+            - '/Videos/Movies:/Movies' # Point to your Films or media
+            - '/Videos/TV:/TV' # Point to your Downloads
+            - '/Archive/Backup:/backup' # Point to your backup/Archive
+        environment:
+            - TZ=Europe/London #Set you TZ
+            - PGID=123 #your UUID
+            - PUID=254 #your GUID
+        ports:
+            - '6767:6767' # Change Left for host port change
+        container_name: Bazarr_Subtitles # Docker Container Name
+        hostname: Bazarr_Subtitles # Docker Hostname
+        healthcheck: # Docker Health check
+          test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:6767/health"]
+          interval: 30s
+          timeout: 10s
+          retries: 5

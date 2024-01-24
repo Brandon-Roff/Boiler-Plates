@@ -41,7 +41,7 @@ Go to the project directory
 | [Radarr🎬](Docker/Media/Radarr/docker-compose.yml) | https://radarr.video/ | `✅` | `❌` | 7878/tcp |
 | [Sonarr📺](Docker/Media/Sonarr/docker-compose.yml) | https://sonarr.tv/ | `✅` | `❌` | 8989/tcp |
 | [Prowlarr 🌐🔗](Docker/Media/Prowlarr/docker-compose.yml) | https://prowlarr.com/ | `✅` | `❌` | 9696/tcp |
-|  |  |  |  |  |
+| [Bazarr 🗚] | https://www.bazarr.media/ | `✅` | `❌` | 6767/tcp |
 
 
 
