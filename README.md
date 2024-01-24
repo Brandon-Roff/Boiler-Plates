@@ -1,5 +1,5 @@
 
-<p align="center"> <img src="Images/Header.png" alt="Header Images" style="border-radius: 50%;" /> </p>
+<p align="center"> <img src="Images/Header.png" alt="Header Images"</p>
 
 
 
@@ -31,6 +31,7 @@ Go to the project directory
 ```bash
   cd Boilerplates
 ```
+
 
 
 

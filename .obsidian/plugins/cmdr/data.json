@@ -10,15 +10,21 @@
   "statusBar": [],
   "pageHeader": [
     {
+      "id": "obsidian-git:commit-specified-message",
+      "icon": "git-commit",
+      "name": "Obsidian Git: Commit all changes with specific message",
+      "mode": "any"
+    },
+    {
       "id": "obsidian-git:push2",
       "icon": "send",
       "name": "Obsidian Git: Push",
       "mode": "any"
     },
     {
-      "id": "obsidian-git:commit-specified-message",
-      "icon": "git-commit",
-      "name": "Obsidian Git: Commit all changes with specific message",
+      "id": "obsidian-icons-plugin:open-icons-plugin-modal",
+      "icon": "image",
+      "name": "Icons: Insert Icon",
       "mode": "any"
     }
   ],
