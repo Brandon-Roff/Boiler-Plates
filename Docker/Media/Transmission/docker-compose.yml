@@ -1,0 +1,28 @@
+---
+services:
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: Transmission-Bittorrent
+    hostname: Transmission-Bittorrent
+    healthcheck: # Docker Health check
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:6767/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    environment:
+      - TZ=Europe/London
+      - TRANSMISSION_WEB_HOME= # optional
+      - USER= # optional
+      - PASS= # optional
+      - WHITELIST= # optional
+      - PEERPORT= # optional
+      - HOST_WHITELIST= # optional
+    volumes:
+      - ./config:/config
+      - ./downloads:/downloads
+      - ./watch:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
