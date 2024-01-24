@@ -32,6 +32,7 @@ Go to the project directory
 ```
 
 
+
 # Boiler Plate List
 
 | Program | Project URL  | Docker 🐳 | Systemd | Standard Port |
@@ -41,6 +42,7 @@ Go to the project directory
 | [Sonarr📺](Docker/Media/Sonarr/docker-compose.yml) | https://sonarr.tv/ | `✅` | `❌` | 8989/tcp |
 | [Prowlarr 🌐🔗](Docker/Media/Prowlarr/docker-compose.yml) | https://prowlarr.com/ | `✅` | `❌` | 9696/tcp |
 |  |  |  |  |  |
+
 
 
 
