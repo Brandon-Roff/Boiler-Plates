@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+    linuxserver:
+        image: lscr.io/linuxserver/prowlarr:latest
+        restart: always
+        volumes:
+            - './config:/config' # Point to config folder you may want a volume 
+            - '/Archive/Backup:/backup' # Point to your backup/Archive
+        environment:
+            - TZ=Europe/London #Set you TZ
+            - PGID=123 #your UUID
+            - PUID=254 #your GUID
+        ports:
+            - '9696:9696' # Change Left for host port change
+        container_name: Prowlarr_Indexers # Docker Container Name
+        hostname: Prowlarr_Indexers # Docker Hostname
+        healthcheck: # Docker Health check
+          test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9696/health"]
+          interval: 30s
+          timeout: 10s
+          retries: 5
