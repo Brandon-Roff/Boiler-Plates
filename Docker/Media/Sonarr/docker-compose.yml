@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+    linuxserver:
+        image: ghcr.io/linuxserver/sonarr
+        restart: always
+        volumes:
+            - './config:/config' # Point to config folder you may want a volume 
+            - '/Videos/TV-Shows:/tv' # Point to your Shows or media
+            - '/Downloads:/downloads' # Point to your Downloads
+            - '/Archive/Backup:/backup' # Point to your backup/Archive
+        environment:
+            - TZ=Europe/London #Set you TZ
+            - PGID=123 #your UUID
+            - PUID=254 #your GUID
+        ports:
+            - '8989:8989' #Change Left for host port change
+        container_name: Sonarr_TV # Docker Container Name
+        hostname: Sonarr_TV # Docker Hostname
+        healthcheck: # Docker Health check
+          test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8989/health"]
+          interval: 30s
+          timeout: 10s
+          retries: 5
