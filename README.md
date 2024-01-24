@@ -34,8 +34,10 @@ Go to the project directory
 
 
 # Boiler Plate List
+<center>
+<h3> Media Box </h3>
+</center>
 
-### Media Box
 | Program | Project URL | Docker-Compose 🐳 | Systemd | Standard Port |
 | :--: | :--: | :--: | :--: | :--: |
 | [Bazarr 🗚](Docker/Media/Bazarr/docker-compose.yml) | https://www.bazarr.media/ | `✅` | `❌` | 6767/tcp |
@@ -44,6 +46,7 @@ Go to the project directory
 | [Radarr🎬](Docker/Media/Radarr/docker-compose.yml) | https://radarr.video/ | `✅` | `❌` | 7878/tcp |
 | [Sonarr📺](Docker/Media/Sonarr/docker-compose.yml) | https://sonarr.tv/ | `✅` | `❌` | 8989/tcp |
 | [Transmission 🧲](Docker/Media/Transmission/docker-compose.yml) | https://transmissionbt.com/ | `✅` | `❌` | 9091/tcp |
+|  |  |  |  |  |
 
 
 
