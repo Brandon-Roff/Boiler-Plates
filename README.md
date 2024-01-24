@@ -36,10 +36,10 @@ Go to the project directory
 
 # Boiler Plate List
 
-| Program |    Docker   |  Systemd  | 
-| ------- | ------------ | --------- |
-|   <br>[📺Sonarr](Docker/Media/Sonarr/docker-compose.yml)  |      `✅`     |    `❌`    |
-| [🎬Radarr](Docker/Media/Radarr/docker-compose.yml)  |      `✅`     |    `❌`    |
+|                        Program                         | Docker | Systemd |
+|:------------------------------------------------------:|:------:|:-------:|
+| [📺Sonarr](Docker/Media/Sonarr/docker-compose.yml) |  `✅`  |  `❌`   |
+|   [🎬Radarr](Docker/Media/Radarr/docker-compose.yml)   |  `✅`  |  `❌`   |
 
 
 
