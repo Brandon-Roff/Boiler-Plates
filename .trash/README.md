@@ -1,10 +1,9 @@
 
-<p align="center"> <img src="Images/Header.png" alt="Header Images"></p>
+<p align="center"> <img src="Images/Header.png" alt="Header Images"</p>
 
 
 
-# 🚀 Awesome Code and Configuration Boilerplates🛠️
-
+# 🚀 Awesome Code and Configuration Boilerplates 🛠️
 
 ### Welcome to the Awesome Code and Configuration Boilerplates repository! Your ultimate source for elegant and well-structured boilerplate code, empowering you to jumpstart projects and streamline configurations with finesse.
 
@@ -34,12 +33,8 @@ Go to the project directory
 ```
 
 
-# Boiler Plate List
 
-| Program |    Docker   |  Systemd  | 
-| ------- | ------------ | --------- |
-|   <br>[📺Sonarr](Docker/Media/Sonarr/docker-compose.yml)  |      `✅`     |    `❌`    |
-| [🎬Radarr](Docker/Media/Radarr/docker-compose.yml)  |      `✅`     |    `❌`    |
+
 
 
 

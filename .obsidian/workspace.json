@@ -138,14 +138,15 @@
             }
           },
           {
-            "id": "caf4cff3fdd1595b",
+            "id": "b0a216d9b956a0c3",
             "type": "leaf",
             "state": {
-              "type": "calendar",
+              "type": "advanced-tables-toolbar",
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -167,8 +168,12 @@
   },
   "active": "20f59ffd4c589057",
   "lastOpenFiles": [
-    "Images/Header.png",
+    "Docker/Media/Sonarr/docker-compose.yml.md",
     "README.md",
+    "Docker/Media/Sonarr",
+    "Docker/Media",
+    "Docker",
+    "Images/Header.png",
     "Images/Thumbs.db",
     "Images/Header.png.crdownload",
     "Images",
@@ -193,11 +198,7 @@
     "Media Sever/Radarr/Radarr.md",
     "Media Sever/Sonarr/Installing Sonarr 1.md",
     "Media Sever/Installing Sonarr.md",
-    "images/media/Bitwarden.ico",
-    "images/media/Bazarr.ico",
-    "Media Sever/Sonarr",
     "_templates/Media/Arr Post Install.md",
-    "Untitled.md",
     "Pasted image 20240104190943.png",
     "Media Sever/Sonarr/Sonarr.md",
     "Media Sever/Plex/Setting up Plex Media Sever.md",
