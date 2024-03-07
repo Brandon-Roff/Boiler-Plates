@@ -43,7 +43,7 @@ Go to the project directory
 | [Bazarr 🗚](Docker/Media/Bazarr/docker-compose.yml) | https://www.bazarr.media/ | `✅` | `❌` | 6767/tcp |
 | [Lidarr🎵](Docker/Media/Lidarr/docker-compose.yml) | https://lidarr.audio/ | `✅` | `❌` | 8686/tcp |
 | [Prowlarr 🌐🔗](Docker/Media/Prowlarr/docker-compose.yml) | https://prowlarr.com/ | `✅` | `❌` | 9696/tcp |
-| [Radarr🎬](Docker/Media/Radarr/docker-compose.yml) | https://radarr.video/ | `✅` | `❌` | 7878/tcp |
+| [Radarr🎬](Docker/Media/Radarr/) | https://radarr.video/ | `✅` | `❌` | 7878/tcp |
 | [Sonarr📺](Docker/Media/Sonarr/) | https://sonarr.tv/ | `✅` | `❌` | 8989/tcp |
 | [Transmission 🧲](Docker/Media/Transmission/docker-compose.yml) | https://transmissionbt.com/ | `✅` | `❌` | 9091/tcp |
 |  |  |  |  |  |

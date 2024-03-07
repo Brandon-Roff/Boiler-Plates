@@ -83,6 +83,11 @@ After changing the values to match your layout you can run the container headles
 sudo docker-compose up -d 
 ```
 
+Also remeber to allow port through UFW
+
+```bash
+sudo ufw allow 8989/tcp
+```
 
 ## 🤝 Contributing
 
