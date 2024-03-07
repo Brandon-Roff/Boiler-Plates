@@ -44,7 +44,7 @@ Go to the project directory
 | [Lidarr🎵](Docker/Media/Lidarr/docker-compose.yml) | https://lidarr.audio/ | `✅` | `❌` | 8686/tcp |
 | [Prowlarr 🌐🔗](Docker/Media/Prowlarr/docker-compose.yml) | https://prowlarr.com/ | `✅` | `❌` | 9696/tcp |
 | [Radarr🎬](Docker/Media/Radarr/docker-compose.yml) | https://radarr.video/ | `✅` | `❌` | 7878/tcp |
-| [Sonarr📺](Docker/Media/Sonarr/docker-compose.yml) | https://sonarr.tv/ | `✅` | `❌` | 8989/tcp |
+| [Sonarr📺](Docker/Media/Sonarr/) | https://sonarr.tv/ | `✅` | `❌` | 8989/tcp |
 | [Transmission 🧲](Docker/Media/Transmission/docker-compose.yml) | https://transmissionbt.com/ | `✅` | `❌` | 9091/tcp |
 |  |  |  |  |  |
 
