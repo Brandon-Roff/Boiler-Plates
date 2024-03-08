@@ -1,4 +1,4 @@
-<p align="center"> <img src="/Images/Media/Lidarr.png" alt="Lidarr Icon"></p>
+<p align="center"> <img src="/Images/Media/Lidarr.png" alt="Lidarr Icon" style="width: 25%;"></p>
 
 
 # Lidarr 🎵
