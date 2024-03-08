@@ -1,3 +1,6 @@
+<p align="center"> <img src="/Images/Media/Sonarr.png" alt="Sonarr Icon"></p>
+
+
 # Sonarr 📺
 
 Sonarr is a PVR (Personal Video Recorder) for Usenet and BitTorrent users. It allows you to automatically download and organize your favorite TV shows, making it easy to keep up with your favorite series.
