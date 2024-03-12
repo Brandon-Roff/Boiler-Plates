@@ -94,7 +94,7 @@ sudo ufw allow 7878/tcp
 
 ## 🤝 Contributing
 
-If you would like to contribute to Radarr, please check out the [contribution guidelines](https://github.com/Radarr/Radarr/blob/develop/.github/CONTRIBUTING.md).
+If you would like to contribute to Radarr,[Donate Here!](https://radarr.video/donate)
 
 ## 📃 License
 

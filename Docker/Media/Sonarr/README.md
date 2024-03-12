@@ -94,7 +94,7 @@ sudo ufw allow 8989/tcp
 
 ## 🤝 Contributing
 
-If you would like to contribute to Sonarr, please check out the [contribution guidelines](https://github.com/Sonarr/Sonarr/blob/develop/.github/CONTRIBUTING.md).
+If you would like to contribute to Sonarr,[Donate Here!](https://sonarr.tv/donate).
 
 ## 📃 License
 
