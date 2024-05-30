@@ -9,11 +9,9 @@
 ### Welcome to the Awesome Code and Configuration Boilerplates repository! Your ultimate source for elegant and well-structured boilerplate code, empowering you to jumpstart projects and streamline configurations with finesse.
 
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 
-[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 
 
 ## Copy Projects Locally 
@@ -46,6 +44,7 @@ Go to the project directory
 | [Radarr🎬](Docker/Media/Radarr/) | https://radarr.video/ | `✅` | `❌` | 7878/tcp |
 | [Sonarr📺](Docker/Media/Sonarr/) | https://sonarr.tv/ | `✅` | `❌` | 8989/tcp |
 | [Transmission 🧲](Docker/Media/Transmission/docker-compose.yml) | https://transmissionbt.com/ | `✅` | `❌` | 9091/tcp |
+| [Podgrab 🎧](Docker/Media/PodGrab/docker-compose.yml) | https://github.com/akhilrex/podgrab | `✅` | `❌` | 9091/tcp |
 |  |  |  |  |  |
 
 

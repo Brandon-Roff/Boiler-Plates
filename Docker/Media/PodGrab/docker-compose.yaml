@@ -1,0 +1,17 @@
+version: "2.1"
+services:
+  podgrab:
+    image: akhilrex/podgrab:latest
+    container_name: Podcasts
+    environment:
+      - CHECK_FREQUENCY=240
+#      - PASSWORD=$PASSWORD   ## Uncomment to enable basic authentication, username = podgrab
+      - PGID=123 #Specify Group ID
+      - PUID=456 # Specify UID
+    volumes:
+      - ./data:/config
+      - ./Podcasts:/assets #Change Left Location to your podcast location
+    ports:
+      - 8787:8080
+    restart: unless-stopped
+
