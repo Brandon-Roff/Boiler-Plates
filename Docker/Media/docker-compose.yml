@@ -1,0 +1,101 @@
+version: '3.9'
+
+services:
+    Sonarr:
+        image: ${sonarr_image}
+        restart: always
+        volumes:
+            - '${sonarr_config}:/config'
+            - '${sonarr_tv_shows}:/tv' #optional
+            - '${plex_downloads}:/downloads'
+            - '${media_backup}:/backup'
+            - '/etc/hosts/:/etc/hosts'
+            - '${plex_archive}:/Archive'
+        environment:
+            - TZ=${timezone}
+            - PGID=${pgid}
+            - PUID=${puid}
+        ports:
+            - '${sonarr_port}:8989'
+        container_name: Sonarr_TV
+        hostname: Sonarr_TV
+        healthcheck:
+            test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:${sonarr_port}/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+        networks:
+            - Media
+
+    Radarr:
+        image: ${radarr_image}
+        restart: always
+        volumes:
+            - '${radarr_config}:/config'
+            - '${plex_movies}:/Movies' #optional
+            - '${plex_downloads}:/downloads'
+            - '${media_backup}:/backup'
+            - '/etc/hosts/:/etc/hosts'
+            - '${plex_archive}:/Archive'
+        environment:
+            - TZ=${timezone}
+            - PGID=${pgid}
+            - PUID=${puid}
+        ports:
+            - '${radarr_port}:7878'
+        container_name: Radarr_Films
+        hostname: Radarr_Films
+        healthcheck:
+            test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:${radarr_port}/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+        networks:
+            - Media
+
+    Bazarr:
+        image: ${bazarr_image}
+        restart: always
+        volumes:
+            - '${plex_movies}:/Movies'
+            - '${plex_tv_shows}:/TV-Shows'
+            - '${bazarr_config}:/config'
+            - '${archive_backup}:/backup'
+            - '/etc/hosts/:/etc/hosts'
+        environment:
+            - TZ=${timezone}
+            - PGID=${pgid}
+            - PUID=${puid}
+        ports:
+            - '${bazarr_port}:6767'
+        container_name: Bazarr_Subtitles
+        hostname: Bazarr_Subtitles
+        healthcheck:
+            test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:${bazarr_port}/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+        networks:
+            - Media
+
+    flaresolverr:
+        container_name: FlareSolverr
+        ports:
+            - '8191:8191'
+        environment:
+            - LOG_LEVEL=info
+        volumes:
+            - '${flaresolverr_data}:/data/'
+        restart: always
+        image: ${flaresolverr_image}
+        healthcheck:
+            test: ["CMD-SHELL", "curl -f http://localhost:8191/ || exit 1"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+        networks:
+            - Media
+
+networks:
+    Media:
+        external: true

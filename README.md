@@ -47,7 +47,7 @@ Go to the project directory
 | [Podgrab 🎧](Docker/Media/PodGrab/docker-compose.yml) | https://github.com/akhilrex/podgrab | `✅` | `❌` | 8787/tcp |
 |  |  |  |  |  |
 
-
+## Or install them all with the MediaBox [Docker Compose Template!](Docker/Media/docker-compose.yml)
 
 
 ## 🛤️ <span style="color:#00ff00;">Roadmap</span> 
