@@ -47,7 +47,21 @@ Go to the project directory
 | [Podgrab 🎧](Docker/Media/PodGrab/docker-compose.yml) | https://github.com/akhilrex/podgrab | `✅` | `❌` | 8787/tcp |
 |  |  |  |  |  |
 
-## Or install them all with the MediaBox [Docker Compose Template!](Docker/Media/docker-compose.yml)
+#### Or install them all with the MediaBox [Docker Compose Template!](Docker/Media/docker-compose.yml)
+
+<br>
+
+<center>
+<h3> Selfhosted 365 </h3>
+</center>
+
+| Program | Project URL | Docker-Compose 🐳 | Systemd | Standard Port |
+| :--: | :--: | :--: | :--: | :--: |
+| [Nextcloud](Docker/Selfhosted-365/Nextcloud) | https://nextcloud.com/ | `✅` | `❌` | 8080/tcp |
+| [OnlyOffice](Docker/Selfhosted-365/OnlyOffice) | https://www.onlyoffice.com/en/| `✅` | `❌` | 8081/tcp |
+[Draw.io](Docker/Selfhosted-365/Draw.io) | https://app.diagrams.net/| `✅` | `❌` | 8082/tcp |
+  |  |  |  |  |
+
 
 
 ## 🛤️ <span style="color:#00ff00;">Roadmap</span> 

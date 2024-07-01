@@ -1,0 +1,70 @@
+version: '3.3'
+services:
+   redis:
+    image: redis
+    container_name: "Nextcloud-REDIS"
+    hostname: "Nextcloud-REDIS"
+    healthcheck:
+     test: ["CMD-SHELL", "redis-cli ping || exit 1"]
+    volumes:
+      - ./redis:/data:rw
+    environment:
+      TZ: Europe/London
+    restart: unless-stopped
+    networks:
+      - Office
+
+   mariadb:
+    container_name: Nextcloud-DB
+    hostname: Nextcloud-DB
+    image: mariadb:11.2.3-jammy
+    volumes:
+      - ./db:/var/lib/mysql:rw
+    environment:
+      - MYSQL_ROOT_PASSWORD=<root_password>
+      - MYSQL_PASSWORD=<password>
+      - MYSQL_DATABASE=Cloud
+      - MYSQL_USER=<username>
+      - TZ=Europe/London
+      - MARIADB_AUTO_UPGRADE=1
+    restart: always
+    depends_on:
+      - redis
+    ports:
+      - 3307:3306
+    networks:
+      - Office
+
+   nextcloud:
+    container_name: Nextcloud
+    ports:
+      - 8080:80
+    environment:
+      - REDIS_HOST=Nextcloud-REDIS
+      - NEXTCLOUD_TRUSTED_DOMAINS=<your_domain>
+      - TRUSTED_PROXIES=<your_domain>
+      - OVERWRITEHOST=<your_domain>
+      - OVERWRITEPROTOCOL=https
+      - MYSQL_PASSWORD=<password>
+      - MYSQL_DATABASE=Cloud
+      - MYSQL_USER=<username>
+      - MYSQL_HOST=Nextcloud-DB
+    healthcheck:
+     test: curl -f http://localhost:80/ || exit 1
+    volumes:
+      - ./html:/var/www/html:rw
+      - ./custom_apps:/var/www/html/custom_apps:rw
+      - ./config:/var/www/html/config:rw
+      - /mnt/Cloud:/var/www/html/data:rw
+      - ./themes:/var/www/html/themes:rw
+    image: nextcloud:latest
+    restart: always
+    depends_on:
+      - mariadb
+      - redis
+    networks:
+      - Office
+
+networks:
+  Office:
+    external: true

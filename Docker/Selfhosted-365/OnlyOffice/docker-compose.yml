@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+
+   documentserver:
+       container_name: OnlyOffice
+       ports:
+           - '8467:80'
+       volumes:
+           - './onlyoffice-logs:/var/log/onlyoffice'
+           - './onlyoffice-data:/var/www/onlyoffice/Data'
+       environment:
+           - JWT_ENABLED=true
+           - JWT_SECRET=<jwt_secret>
+       restart: always
+       image: onlyoffice/documentserver
+       healthcheck:
+            test: curl -f http://localhost:80/ || exit 1
+       networks:
+           - Office
+
+networks:
+  Office:
+    external: true

@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+   drawio:
+    container_name: Draw.io
+    image: jgraph/drawio:latest
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:8080/ || exit 1"]
+    mem_limit: 4g
+    cpu_shares: 768
+    security_opt:
+      - no-new-privileges:true
+    restart: on-failure:5
+    ports:
+      - 8082:8080
+    networks:
+      - Office
+    volumes:
+      - ./draw-io_data:/data
+
+networks:
+  Office:
+    external: true
