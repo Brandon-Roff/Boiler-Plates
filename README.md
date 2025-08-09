@@ -32,9 +32,8 @@ Go to the project directory
 
 
 # Boiler Plate List
-<center>
-<h3> Media Box </h3>
-</center>
+
+### [Media Stack](https://github.com/Brandon-Roff/Boiler-Plates/tree/main/Docker/Media)
 
 | Program | Project URL | Docker-Compose 🐳 | Systemd | Standard Port |
 | :--: | :--: | :--: | :--: | :--: |
