@@ -1,101 +1,256 @@
-version: '3.9'
+version: "3.9"
 
 services:
-    Sonarr:
-        image: ${sonarr_image}
-        restart: always
-        volumes:
-            - '${sonarr_config}:/config'
-            - '${sonarr_tv_shows}:/tv' #optional
-            - '${plex_downloads}:/downloads'
-            - '${media_backup}:/backup'
-            - '/etc/hosts/:/etc/hosts'
-            - '${plex_archive}:/Archive'
-        environment:
-            - TZ=${timezone}
-            - PGID=${pgid}
-            - PUID=${puid}
-        ports:
-            - '${sonarr_port}:8989'
-        container_name: Sonarr_TV
-        hostname: Sonarr_TV
-        healthcheck:
-            test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:${sonarr_port}/health"]
-            interval: 30s
-            timeout: 10s
-            retries: 5
-        networks:
-            - Media
+  Sonarr:
+    image: ghcr.io/linuxserver/sonarr:${SONARR_TAG:-latest}
+    container_name: ${SONARR_NAME:-sonarr}
+    hostname: ${SONARR_HOSTNAME:-sonarr}
+    restart: always
+    environment:
+      - TZ=${TZ}
+      - PGID=${SONARR_PGID}
+      - PUID=${SONARR_PUID}
+    ports:
+      - "${SONARR_PORT_HOST:-8989}:8989"
+    volumes:
+      - "${APPDATA_ROOT}/Sonarr/config:/config"
+      - "${TV_PATH}:/tv"
+      - "${DOWNLOADS_PATH}:/downloads"
+      - "${BACKUP_PATH}:/backup"
+      - "${ARCHIVE_PATH}:/Archive"
+      # Optional: bind host /etc/hosts
+      # - "${HOSTS_FILE:-/etc/hosts}:/etc/hosts"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8989/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - ${NETWORK_NAME}
 
-    Radarr:
-        image: ${radarr_image}
-        restart: always
-        volumes:
-            - '${radarr_config}:/config'
-            - '${plex_movies}:/Movies' #optional
-            - '${plex_downloads}:/downloads'
-            - '${media_backup}:/backup'
-            - '/etc/hosts/:/etc/hosts'
-            - '${plex_archive}:/Archive'
-        environment:
-            - TZ=${timezone}
-            - PGID=${pgid}
-            - PUID=${puid}
-        ports:
-            - '${radarr_port}:7878'
-        container_name: Radarr_Films
-        hostname: Radarr_Films
-        healthcheck:
-            test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:${radarr_port}/health"]
-            interval: 30s
-            timeout: 10s
-            retries: 5
-        networks:
-            - Media
+  Radarr:
+    image: lscr.io/linuxserver/radarr:${RADARR_TAG:-nightly}
+    container_name: ${RADARR_NAME:-radarr}
+    hostname: ${RADARR_HOSTNAME:-radarr}
+    restart: always
+    environment:
+      - TZ=${TZ}
+      - PGID=${RADARR_PGID}
+      - PUID=${RADARR_PUID}
+    ports:
+      - "${RADARR_PORT_HOST:-7878}:7878"
+    volumes:
+      - "${APPDATA_ROOT}/Radarr/config:/config"
+      - "${MOVIES_PATH}:/Movies"
+      - "${DOWNLOADS_PATH}:/downloads"
+      - "${BACKUP_PATH}:/backup"
+      - "${ARCHIVE_PATH}:/Archive"
+      # - "${HOSTS_FILE:-/etc/hosts}:/etc/hosts"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:7878/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - ${NETWORK_NAME}
 
-    Bazarr:
-        image: ${bazarr_image}
-        restart: always
-        volumes:
-            - '${plex_movies}:/Movies'
-            - '${plex_tv_shows}:/TV-Shows'
-            - '${bazarr_config}:/config'
-            - '${archive_backup}:/backup'
-            - '/etc/hosts/:/etc/hosts'
-        environment:
-            - TZ=${timezone}
-            - PGID=${pgid}
-            - PUID=${puid}
-        ports:
-            - '${bazarr_port}:6767'
-        container_name: Bazarr_Subtitles
-        hostname: Bazarr_Subtitles
-        healthcheck:
-            test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:${bazarr_port}/health"]
-            interval: 30s
-            timeout: 10s
-            retries: 5
-        networks:
-            - Media
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:${FLARESOLVERR_TAG:-latest}
+    container_name: ${FLARESOLVERR_NAME:-flaresolverr}
+    restart: always
+    environment:
+      - LOG_LEVEL=${FLARESOLVERR_LOG_LEVEL:-info}
+    ports:
+      - "${FLARESOLVERR_PORT_HOST:-8191}:8191"
+    volumes:
+      - "${APPDATA_ROOT}/FlareSolverr/Data:/data"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8191/ || exit 1"]
+    networks:
+      - ${NETWORK_NAME}
 
-    flaresolverr:
-        container_name: FlareSolverr
-        ports:
-            - '8191:8191'
-        environment:
-            - LOG_LEVEL=info
-        volumes:
-            - '${flaresolverr_data}:/data/'
-        restart: always
-        image: ${flaresolverr_image}
-        healthcheck:
-            test: ["CMD-SHELL", "curl -f http://localhost:8191/ || exit 1"]
-            interval: 30s
-            timeout: 10s
-            retries: 3
-        networks:
-            - Media
+  Bazarr:
+    image: lscr.io/linuxserver/bazarr:${BAZARR_TAG:-latest}
+    container_name: ${BAZARR_NAME:-bazarr}
+    hostname: ${BAZARR_HOSTNAME:-bazarr}
+    restart: always
+    environment:
+      - TZ=${TZ}
+      - PGID=${BAZARR_PGID}
+      - PUID=${BAZARR_PUID}
+    ports:
+      - "${BAZARR_PORT_HOST:-6767}:6767"
+    volumes:
+      - "${MOVIES_PATH}:/Movies"
+      - "${TV_PATH}:/TV-Shows"
+      - "${APPDATA_ROOT}/Bazarr/config:/config"
+      - "${BACKUP_PATH}:/backup"
+      # - "${HOSTS_FILE:-/etc/hosts}:/etc/hosts"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:6767/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - ${NETWORK_NAME}
+
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:${ABS_TAG:-latest}
+    container_name: ${ABS_NAME:-audiobookshelf}
+    restart: always
+    environment:
+      - TZ=${TZ}
+      - PGID=${ABS_PGID}
+      - PUID=${ABS_PUID}
+    ports:
+      - "${ABS_PORT_HOST:-13378}:80"
+    volumes:
+      - "${AUDIOBOOKS_PATH}:/audiobooks"
+      - "${PODCASTS_PATH}:/podcasts"
+      - "${APPDATA_ROOT}/AudioBookshelf/config:/config"
+      - "${APPDATA_ROOT}/AudioBookshelf/metadata:/metadata"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:80/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - ${NETWORK_NAME}
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:${PROWLARR_TAG:-latest}
+    container_name: ${PROWLARR_NAME:-prowlarr}
+    hostname: ${PROWLARR_HOSTNAME:-prowlarr}
+    restart: always
+    environment:
+      - TZ=${TZ}
+      - PGID=${PROWLARR_PGID}
+      - PUID=${PROWLARR_PUID}
+    ports:
+      - "${PROWLARR_PORT_HOST:-9696}:9696"
+    volumes:
+      - "${APPDATA_ROOT}/Prowlarr/config:/config"
+      - "${BACKUP_PATH}:/backup"
+      - "${HOSTS_FILE:-/etc/hosts}:/etc/hosts"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9696/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - ${NETWORK_NAME}
+
+  tautulli:
+    image: ghcr.io/tautulli/tautulli:${TAUTULLI_TAG:-latest}
+    container_name: ${TAUTULLI_NAME:-tautulli}
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+      - PGID=${TAUTULLI_PGID}
+      - PUID=${TAUTULLI_PUID}
+    ports:
+      - "${TAUTULLI_PORT_HOST:-8181}:8181"
+    volumes:
+      - "${APPDATA_ROOT}/Tautulli/config:/config"
+      - "${NAS_ROOT}:/NAS"
+      - "${BACKUP_ROOT}:/backup"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8181/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - ${NETWORK_NAME}
+
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:${OVERSEERR_TAG:-latest}
+    container_name: ${OVERSEERR_NAME:-overseerr}
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+      - PGID=${OVERSEERR_PGID}
+      - PUID=${OVERSEERR_PUID}
+      - LOG_LEVEL=${OVERSEERR_LOG_LEVEL:-debug}
+    ports:
+      - "${OVERSEERR_PORT_HOST:-5055}:5055"
+    volumes:
+      - "${APPDATA_ROOT}/Overseerr/config:/config"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:5055"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - ${NETWORK_NAME}
+
+  dizquetv:
+    image: vexorian/dizquetv:${DIZQUETV_TAG:-latest}
+    container_name: ${DIZQUETV_NAME:-dizquetv}
+    restart: unless-stopped
+    environment:
+      - PGID=${DIZQUETV_PGID}
+      - PUID=${DIZQUETV_PUID}
+    ports:
+      - "${DIZQUETV_PORT_HOST:-7373}:8000"
+    volumes:
+      - "${APPDATA_ROOT}/DizqueTV/data:/home/node/app/.dizquetv"
+    networks:
+      - ${NETWORK_NAME}
+
+  plex:
+    image: lscr.io/linuxserver/plex:${PLEX_TAG:-latest}
+    container_name: ${PLEX_NAME:-plex}
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+      - PGID=${PLEX_PGID}
+      - PUID=${PLEX_PUID}
+      - VERSION=docker
+      # Optional claim token:
+      # - PLEX_CLAIM=${PLEX_CLAIM}
+    volumes:
+      - "${APPDATA_ROOT}/PlexMediaServer/config:/config"
+      - "${NAS_ROOT}:/NAS"
+      - "${BACKUP_ROOT}:/Backup"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:32400/web"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  ytdl_material:
+    image: tzahi12345/youtubedl-material:${YTDL_MATERIAL_TAG:-latest}
+    container_name: ${YTDL_MATERIAL_NAME:-ytdl-material}
+    restart: always
+    environment:
+      - ytdl_mongodb_connection_string=${YTDL_MONGO_URL:-mongodb://ytdl_mongo:27017}
+      - ytdl_use_local_db=${YTDL_USE_LOCAL_DB:-false}
+      - write_ytdl_config=${YTDL_WRITE_CONFIG:-true}
+    depends_on:
+      - ytdl-mongo-db
+    ports:
+      - "${YTDL_MATERIAL_PORT_HOST:-8998}:17442"
+    volumes:
+      - "${APPDATA_ROOT}/YTMP4/appdata:/app/appdata"
+      - "${APPDATA_ROOT}/YTMP4/audio:/app/audio"
+      - "${APPDATA_ROOT}/YTMP4/video:/app/video"
+      - "${APPDATA_ROOT}/YTMP4/subscriptions:/app/subscriptions"
+      - "${APPDATA_ROOT}/YTMP4/users:/app/users"
+    networks:
+      - ${NETWORK_NAME}
+
+  ytdl-mongo-db:
+    image: mongo:${MONGO_TAG:-4}
+    container_name: ${YTDL_MONGO_NAME:-ytdl_mongo}
+    restart: always
+    logging:
+      driver: "none"
+    volumes:
+      - "${APPDATA_ROOT}/YTMP4/db:/data/db"
+    networks:
+      - ${NETWORK_NAME}
 
 networks:
-    Media:
-        external: true
+  ${NETWORK_NAME}:
+    external: true
