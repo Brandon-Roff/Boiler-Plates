@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:${NGINX_TAG:-latest}
+    container_name: ${NGINX_NAME:-nginx}
+    ports:
+      - "${NGINX_PORT_HOST:-8080}:80"
+    volumes:
+      - "${NGINX_CONF_PATH:-./nginx.conf}:/etc/nginx/nginx.conf:ro"
+      - "${WEB_ROOT:-./web}:/usr/share/nginx/html:ro"
+    networks:
+      - ${NETWORK_NAME:-webnet}
+
+  app:
+    image: ${APP_IMAGE:-node:18}
+    container_name: ${APP_NAME:-webapp}
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+    volumes:
+      - "${APP_SRC:-./src}:/app"
+    networks:
+      - ${NETWORK_NAME:-webnet}
+
+networks:
+  ${NETWORK_NAME:-webnet}:
+    driver: bridge

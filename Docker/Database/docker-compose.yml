@@ -1,0 +1,132 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:${POSTGRES_TAG:-latest}
+    container_name: ${POSTGRES_NAME:-postgres}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-user}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - POSTGRES_DB=${POSTGRES_DB:-appdb}
+    volumes:
+      - "${POSTGRES_DATA_PATH:-./data}:/var/lib/postgresql/data"
+    ports:
+      - "${POSTGRES_PORT_HOST:-5432}:5432"
+    networks:
+      - ${NETWORK_NAME:-dbnet}
+
+  pgadmin:
+    image: dpage/pgadmin4:${PGADMIN_TAG:-latest}
+    container_name: ${PGADMIN_NAME:-pgadmin}
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL:-admin@admin.com}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD:-admin}
+    ports:
+      - "${PGADMIN_PORT_HOST:-8081}:80"
+    networks:
+      - ${NETWORK_NAME:-dbnet}
+
+  mariadb:
+    image: mariadb:${MARIADB_TAG:-latest}
+    container_name: ${MARIADB_NAME:-mariadb}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-rootpass}
+      - MYSQL_DATABASE=${MARIADB_DATABASE:-mariadb}
+      - MYSQL_USER=${MARIADB_USER:-user}
+      - MYSQL_PASSWORD=${MARIADB_PASSWORD:-password}
+    volumes:
+      - "${MARIADB_DATA_PATH:-./mariadb}:/var/lib/mysql"
+    ports:
+      - "${MARIADB_PORT_HOST:-3306}:3306"
+    networks:
+      - ${NETWORK_NAME:-dbnet}
+
+  redis:
+    image: redis:${REDIS_TAG:-latest}
+    container_name: ${REDIS_NAME:-redis}
+    ports:
+      - "${REDIS_PORT_HOST:-6379}:6379"
+    volumes:
+      - "${REDIS_DATA_PATH:-./redis}:/data"
+    networks:
+      - ${NETWORK_NAME:-dbnet}
+
+  adminer:
+    image: adminer:${ADMINER_TAG:-latest}
+    container_name: ${ADMINER_NAME:-adminer}
+    ports:
+      - "${ADMINER_PORT_HOST:-8080}:8080"
+    networks:
+      - ${NETWORK_NAME:-dbnet}
+
+  mongodb:
+    image: mongo:${MONGO_TAG:-latest}
+    container_name: ${MONGO_NAME:-mongodb}
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER:-root}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD:-password}
+    volumes:
+      - "${MONGO_DATA_PATH:-./mongo}:/data/db"
+    ports:
+      - "${MONGO_PORT_HOST:-27017}:27017"
+    networks:
+      - ${NETWORK_NAME:-dbnet}
+
+  mysql:
+    image: mysql:${MYSQL_TAG:-latest}
+    container_name: ${MYSQL_NAME:-mysql}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-rootpass}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-mysqldb}
+      - MYSQL_USER=${MYSQL_USER:-user}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
+    volumes:
+      - "${MYSQL_DATA_PATH:-./mysql}:/var/lib/mysql"
+    ports:
+      - "${MYSQL_PORT_HOST:-3307}:3306"
+    networks:
+      - ${NETWORK_NAME:-dbnet}
+
+  phpmyadmin:
+    image: phpmyadmin:${PHPMYADMIN_TAG:-latest}
+    container_name: ${PHPMYADMIN_NAME:-phpmyadmin}
+    environment:
+      - PMA_HOST=${MYSQL_NAME:-mysql}
+      - PMA_USER=${MYSQL_USER:-user}
+      - PMA_PASSWORD=${MYSQL_PASSWORD:-password}
+    ports:
+      - "${PHPMYADMIN_PORT_HOST:-8082}:80"
+    networks:
+      - ${NETWORK_NAME:-dbnet}
+
+  influxdb:
+    image: influxdb:${INFLUXDB_TAG:-latest}
+    container_name: ${INFLUXDB_NAME:-influxdb}
+    environment:
+      - INFLUXDB_DB=${INFLUXDB_DB:-influx}
+      - INFLUXDB_ADMIN_USER=${INFLUXDB_ADMIN_USER:-admin}
+      - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_ADMIN_PASSWORD:-adminpass}
+    volumes:
+      - "${INFLUXDB_DATA_PATH:-./influxdb}:/var/lib/influxdb"
+    ports:
+      - "${INFLUXDB_PORT_HOST:-8086}:8086"
+    networks:
+      - ${NETWORK_NAME:-dbnet}
+
+  timescaledb:
+    image: timescale/timescaledb:${TIMESCALEDB_TAG:-latest}-pg14
+    container_name: ${TIMESCALEDB_NAME:-timescaledb}
+    environment:
+      - POSTGRES_USER=${TIMESCALEDB_USER:-user}
+      - POSTGRES_PASSWORD=${TIMESCALEDB_PASSWORD:-password}
+      - POSTGRES_DB=${TIMESCALEDB_DB:-timescale}
+    volumes:
+      - "${TIMESCALEDB_DATA_PATH:-./timescaledb}:/var/lib/postgresql/data"
+    ports:
+      - "${TIMESCALEDB_PORT_HOST:-5433}:5432"
+    networks:
+      - ${NETWORK_NAME:-dbnet}
+
+networks:
+  ${NETWORK_NAME:-dbnet}:
+    driver: bridge

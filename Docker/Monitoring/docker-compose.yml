@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  prometheus:
+    image: prom/prometheus:${PROMETHEUS_TAG:-latest}
+    container_name: ${PROMETHEUS_NAME:-prometheus}
+    volumes:
+      - "${PROMETHEUS_CONF_PATH:-./prometheus.yml}:/etc/prometheus/prometheus.yml"
+    ports:
+      - "${PROMETHEUS_PORT_HOST:-9090}:9090"
+    networks:
+      - ${NETWORK_NAME:-monitornet}
+
+  grafana:
+    image: grafana/grafana:${GRAFANA_TAG:-latest}
+    container_name: ${GRAFANA_NAME:-grafana}
+    ports:
+      - "${GRAFANA_PORT_HOST:-3000}:3000"
+    volumes:
+      - "${GRAFANA_DATA_PATH:-./grafana}:/var/lib/grafana"
+    networks:
+      - ${NETWORK_NAME:-monitornet}
+
+networks:
+  ${NETWORK_NAME:-monitornet}:
+    driver: bridge
