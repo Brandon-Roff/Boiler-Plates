@@ -1,0 +1,11 @@
+http:
+  middlewares:
+    security-headers:
+      headers:
+        stsSeconds: 63072000
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        frameDeny: true
+        contentTypeNosniff: true
+        browserXssFilter: true

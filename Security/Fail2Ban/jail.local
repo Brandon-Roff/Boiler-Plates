@@ -1,0 +1,33 @@
+[DEFAULT]
+ignoreip = 127.0.0.1/8 10.0.0.0/8 192.168.0.0/16
+bantime  = 1h
+findtime = 10m
+maxretry = 5
+backend = systemd
+usedns = warn
+
+[sshd]
+enabled = true
+port    = ssh
+logpath = %(sshd_log)s
+maxretry = 4
+
+[sshd-ddos]
+enabled = true
+port    = ssh
+filter  = sshd-ddos
+logpath = %(sshd_log)s
+maxretry = 6
+
+[nginx-http-auth]
+enabled = true
+port    = http,https
+logpath = /var/log/nginx/error.log
+maxretry = 4
+
+[transmission]
+enabled = true
+port    = 9091
+filter  = transmission
+logpath = /var/log/transmission/transmission.log
+maxretry = 5

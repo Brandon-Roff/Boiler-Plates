@@ -1,0 +1,16 @@
+[Unit]
+Description=Generic App Service
+After=network.target
+
+[Service]
+Type=simple
+User=app
+Group=app
+WorkingDirectory=/opt/app
+ExecStart=/opt/app/start.sh
+Restart=on-failure
+RestartSec=5
+Environment=ENV=production
+
+[Install]
+WantedBy=multi-user.target

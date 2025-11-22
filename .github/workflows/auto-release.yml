@@ -1,0 +1,87 @@
+name: Auto Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract Conventional Commits since last tag
+        id: commits
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo '')
+          echo "Last tag: $LAST_TAG"
+          if [ -z "$LAST_TAG" ]; then
+            git log --pretty=format:'%s' > commits.txt
+          else
+            git log ${LAST_TAG}..HEAD --pretty=format:'%s' > commits.txt
+          fi
+          echo "commits<<EOF" >> $GITHUB_OUTPUT
+          cat commits.txt >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Determine next version
+        id: version
+        run: |
+          DEFAULT_START=0.1.0
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo '')
+          if [ -z "$LAST_TAG" ]; then
+            NEXT_VERSION=$DEFAULT_START
+          else
+            MAJOR=$(echo $LAST_TAG | cut -d'.' -f1)
+            MINOR=$(echo $LAST_TAG | cut -d'.' -f2)
+            PATCH=$(echo $LAST_TAG | cut -d'.' -f3)
+            COMMITS=$(echo "${{ steps.commits.outputs.commits }}")
+            if echo "$COMMITS" | grep -E 'BREAKING CHANGE|!'; then
+              MAJOR=$((MAJOR + 1))
+              MINOR=0
+              PATCH=0
+            elif echo "$COMMITS" | grep -E '^feat'; then
+              MINOR=$((MINOR + 1))
+              PATCH=0
+            else
+              PATCH=$((PATCH + 1))
+            fi
+            NEXT_VERSION="$MAJOR.$MINOR.$PATCH"
+          fi
+          echo "next_version=$NEXT_VERSION" >> $GITHUB_OUTPUT
+          echo "Next version: $NEXT_VERSION"
+
+      - name: Generate changelog snippet
+        id: changelog
+        run: |
+          echo "# Release ${{ steps.version.outputs.next_version }}" > CHANGELOG_RELEASE.md
+          echo "" >> CHANGELOG_RELEASE.md
+          echo "## Commits" >> CHANGELOG_RELEASE.md
+          echo "" >> CHANGELOG_RELEASE.md
+          echo "${{ steps.commits.outputs.commits }}" | sed 's/^/- /' >> CHANGELOG_RELEASE.md
+          echo "file=CHANGELOG_RELEASE.md" >> $GITHUB_OUTPUT
+
+      - name: Create tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag ${{ steps.version.outputs.next_version }}
+          git push origin ${{ steps.version.outputs.next_version }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.next_version }}
+          name: ${{ steps.version.outputs.next_version }}
+          body_path: CHANGELOG_RELEASE.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
