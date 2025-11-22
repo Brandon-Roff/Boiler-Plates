@@ -22,16 +22,23 @@ jobs:
       - name: Extract Conventional Commits since last tag
         id: commits
         run: |
+          set -euo pipefail
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo '')
-          echo "Last tag: $LAST_TAG"
+          echo "Last tag: ${LAST_TAG:-<none>}"
           if [ -z "$LAST_TAG" ]; then
-            git log --pretty=format:'%s' > commits.txt
+            git log --pretty=format:'%s' > commits.txt || true
           else
-            git log ${LAST_TAG}..HEAD --pretty=format:'%s' > commits.txt
+            git log "$LAST_TAG"..HEAD --pretty=format:'%s' > commits.txt || true
           fi
-          echo "commits<<EOF" >> $GITHUB_OUTPUT
-          cat commits.txt >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          # Ensure file exists even if no commits (edge case)
+          touch commits.txt
+          # Escape percent signs for GitHub output safety
+          ESCAPED=$(sed 's/%/%%/g' commits.txt | tr '\r' '\n')
+          {
+            printf 'commits<<COMMITS\n'
+            cat commits.txt
+            printf '\nCOMMITS\n'
+          } >> "$GITHUB_OUTPUT"
 
       - name: Determine next version
         id: version
